@@ -29,6 +29,11 @@ export default function App() {
     setGameIsOver(false);
   };
 
+  const gameOverHandler = (numberOfRounds) => {
+    setGameIsOver(true);
+    setGuessRounds(numberOfRounds);
+  };
+
   if (!fontsLoaded) {
     return <AppLoading />;
   }
@@ -36,7 +41,9 @@ export default function App() {
   let screen = <StartGameScreen onPickHandler={pickNumberHanlder} />;
 
   if (userNumber) {
-    screen = <GameScreen userNumber={userNumber} onGameOver={setGameIsOver} />;
+    screen = (
+      <GameScreen userNumber={userNumber} onGameOver={gameOverHandler} />
+    );
   }
 
   if (GameIsOver && userNumber) {
